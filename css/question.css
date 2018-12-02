@@ -23,3 +23,9 @@
   margin-bottom: 8px;
   margin-top: 8px;
 }
+#breadcrumbs{
+  text-align: left;
+}
+#current{
+  color: red;
+}

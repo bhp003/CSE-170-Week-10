@@ -5,7 +5,7 @@ function ask() {
     var course = list.options[list.selectedIndex].value;
     var title = document.getElementById("title").value;
     var desc = document.getElementById("desc").value;
-    
+
     if (list.selectedIndex == 0)
       alert("Please select a course");
     else {
@@ -13,7 +13,7 @@ function ask() {
       var ref = firebase.firestore().collection("Courses/CSE 170/Questions");
       ref.get().then((list) => {
         ref.doc("Question " + (list.size + 1)).set({question: desc}).then(() => {
-          window.location.href = "Project/../cse170/cse170.html"
+          window.location.href = "Project/../CSE 170/cse170.html"
         });
       });
     }

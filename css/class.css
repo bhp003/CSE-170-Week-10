@@ -19,6 +19,12 @@
 .titlebox{
 	background-color: blue;
 }
+.breadcrumbs{
+  text-align: left;
+}
 h1{
 	color:white;
+}
+#current{
+  color: red;
 }
