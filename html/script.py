@@ -1,4 +1,5 @@
-files = ["COGS 120/question/question1.html", "./CSE 170/question/question1.html"]
+#files = ["COGS 120/question/question1.html", "./CSE 170/question/question1.html"]
+files = ["CSE 100/question/question1.html"]
 title = '<title>Question 1</title>'
 id = 'makePage(1'
 
@@ -6,7 +7,7 @@ for file in files:
     with open(file, 'r') as f:
         fdata = f.read()
         filedir = file.split('1.html')[0]
-        for i in range(21, 51):
+        for i in range(2, 21):
             print(i)
             data = fdata
             split1 = data.split(title)
