@@ -6,10 +6,11 @@ function ask() {
     var classname = document.title;
     var classid = classname.split(" ");
     var classhtml = classid[0] + classid[1] + ".html";
+    var date = new Date();
 
     var ref = firebase.firestore().collection("Courses/" + classname + "/Questions");
     ref.get().then((list) => {
-      ref.doc("Question " + (list.size + 1)).set({question: desc}).then(() => {
+      ref.doc("Question " + (list.size + 1)).set({question: desc, date: date.getTime()}).then(() => {
         window.location.href = classhtml;
       });
     });
