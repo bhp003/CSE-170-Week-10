@@ -5,7 +5,8 @@ function getQuestion(name) {
   ref.get().then((list) => {
     list.forEach((question) => {
       var post = document.createElement("BUTTON");
-      post.setAttribute("id", id.toString());
+      var id = question.id.split(" ")[1];
+      post.setAttribute("id", id);
       post.appendChild(document.createTextNode(question.get("question")));
 
       var stat = question.get("solved");
