@@ -9,10 +9,10 @@ function ask() {
     if (list.selectedIndex == 0)
       alert("Please select a course");
     else {
-      console.log(course);
+      var owner = firebase.auth().currentUser.email;
       var ref = firebase.firestore().collection("Courses/CSE 170/Questions");
       ref.get().then((list) => {
-        ref.doc("Question " + (list.size + 1)).set({question: desc}).then(() => {
+        ref.doc("Question " + (list.size + 1)).set({question: desc, owner: owner}).then(() => {
           window.location.href = "Project/../CSE 170/cse170.html"
         });
       });
