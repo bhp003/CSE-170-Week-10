@@ -34,7 +34,7 @@ function getQuestion(name) {
 
       post.addEventListener("click", (e) => {
         console.log(e.target);
-        window.location.href = "Project/../question/question" + (e.target.id) + ".html";
+        window.location.href = "Project/../question/question" + id + ".html";
       });
     });
   });

@@ -40,6 +40,8 @@ function getAnswer(id, ref) {
 function displayQuestion(data) {
   var title = document.getElementById("title");
   title.innerHTML = data.get("question");
+  var desc = document.getElementById("desc");
+  desc.innerHTML = data.get("desc");
   var stat = data.get("solved");
   if (stat == null || !stat)
     title.setAttribute("style", "color:red;");
