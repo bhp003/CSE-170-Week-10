@@ -29,7 +29,7 @@ function getAnswer(id, ref) {
   ref.doc("Question " + id).collection("Answers").get().then((list) => {
     list.forEach((ans) => {
       aid++;
-      displayAnswer(ans, ansSection, id, aid);
+      displayAnswer(ans, ansSection, id, aid, ref);
     });
     size = list.size + 1;
     postAnswer(id, ref);

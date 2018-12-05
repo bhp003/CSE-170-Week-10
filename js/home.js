@@ -111,14 +111,17 @@ function getHistory() {
         var history = list.docs;
         for (var i = 0; i < 4; i++) {
           if (history[i] != null) {
+            var item = history[i].get("name");
             var btn = document.createElement("BUTTON");
-            btn.appendChild(document.createTextNode(item.id));
-            section.appendChild(btn);
+            btn.setAttribute("value", item);
+            btn.appendChild(document.createTextNode(item));
       
-            btn.addEventListener("click", () => {
-              var path = (item.id + ".html").replace(/\s/g, "");
-              window.location.href = item.id + "/" + path;
+            btn.addEventListener("click", (e) => {
+              var path = (e.target.value + ".html").replace(/\s/g, "");
+              window.location.href = e.target.value + "/" + path;
             });
+            
+            section.appendChild(btn);
           }
         }        
       });
