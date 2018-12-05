@@ -7,6 +7,13 @@ form.search input[type=text] {
   border: 1px solid grey;
 }
 
+body {
+  font-family: 'Barlow', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .autocomplete {
   position: relative;
   display: inline-block;
@@ -48,17 +55,18 @@ form.search button {
   width: 35px;
   height: 36px;
   border-left: none;
-  background: #2196F3;
+  background-color: rgb(235, 113, 0);
   color: white;
   border: 1px solid grey;
   position: relative;
-  top: -5px;
+  top: -4px;
 }
 
 .title h1 {
   margin-bottom: 20px;
   text-align: center;
   font-size: 150px;
+  font-weight: 600;
 }
 
 .history  {
@@ -67,10 +75,14 @@ form.search button {
 
 .history button {
   position: relative;
-  top: -15px;
+  top: 0;
   width: auto;
   height: 30px;
   font-size: 16px;
+  background: rgb(235, 113, 0);
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 #historyText {
@@ -86,16 +98,64 @@ a.button {
   color: initial;
 }
 .button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
-.links  {
+.links {
   text-align: center;
+}
+
+form {
+  background: black;
+  opacity: .8;
+  padding: 40px;
+  margin: 200px 0;
+
+}
+form .markettext {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+}
+.markettext i {
+  margin-right: 20px;
+}
+
+
+form input {
+  border-radius: 5%;
+}
+
+form button {
+  background-color: rgb(235, 113, 0);
+
+}
+
+form input::placeholder {
+  font-size: 15px;
+  text-align: center;
+}
+
+.top-header {
+    
+}
+
+.top-header img {
+  width: 100%;
+  filter: blur(8px);
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 60%;
+  margin-top: -40px;
+  z-index: -100;
 }

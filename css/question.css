@@ -1,10 +1,12 @@
 #answer {
+  margin: 0 auto;
+  width: 50%;
   border: 2px solid;
   border-radius: 3px;
   margin-bottom: 5px;
   margin-top: 5px;
   border-color: green;
-  font-size: 13pt;
+  font-size: 13pt
 }
 
 #icon {
@@ -15,6 +17,7 @@
 
 #myans {
   font-size: 13pt;
+  font-size: 13pt;
 }
 
 #title {
@@ -22,10 +25,18 @@
   border-radius: 13px;
   margin-bottom: 8px;
   margin-top: 8px;
+  padding: 20px;
 }
-#breadcrumbs{
+#breadcrumbs {
   text-align: left;
 }
-#current{
+#current {
   color: red;
+}
+
+button {
+  background: rgb(235, 113, 0);
+  color: white;
+  padding: 5px;
+  border: none;
 }
