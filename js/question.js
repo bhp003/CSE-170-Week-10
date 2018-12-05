@@ -1,5 +1,6 @@
 var size = 0;
 var aid = 0;
+var user = firebase.auth().currentUser;
 
 function makePage(id, name) {
   var ref = firebase.firestore().collection("Courses/" + name + "/Questions");
@@ -18,6 +19,7 @@ function getQuestion(id, ref) {
   ref.doc("Question " + id).get().then((result) => {
     displayQuestion(result);
   });
+  console.log(user);
 }
 
 function getAnswer(id, ref) {
@@ -39,63 +41,111 @@ function getAnswer(id, ref) {
 
 function displayQuestion(data) {
   var title = document.getElementById("title");
+  var qbox = document.getElementById("qbox");
+  
+  // edit permission
+  var user = "user1";
+  if (user != null && user == data.get("owner")) {
+    var iconbtn = document.createElement("BUTTON");
+    var icon = document.createElement("I");
+    icon.setAttribute("class", "material-icons");
+    icon.setAttribute("id", "icon");
+    icon.appendChild(document.createTextNode("border_color"));
+
+    iconbtn.setAttribute("style", "width: 30px;\nheight: 30px;");
+    iconbtn.setAttribute("align", "center");
+    iconbtn.appendChild(icon);
+    
+    qbox.appendChild(iconbtn);
+    iconbtn.addEventListener("click", () => {
+      ansbox.removeChild(iconbtn);
+      ansbox.removeChild(ans);
+
+      var myAns = document.createElement("INPUT");
+      myAns.setAttribute("type", "text");
+      myAns.setAttribute("value", ans.innerHTML);
+      myAns.setAttribute("id", "myans");
+
+      var divSubmit = document.createElement("DIV");
+      var submitBtn = document.createElement("BUTTON");
+      submitBtn.setAttribute("type", "submit");
+      submitBtn.appendChild(document.createTextNode("Submit"));
+      submitBtn.setAttribute("style", "height: 28px;\n margin-left: 10px;");
+
+      ansbox.appendChild(myAns);
+      ansbox.appendChild(submitBtn);
+
+      submitBtn.addEventListener("click", () => {
+        var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
+        newAns.set({value: myAns.value, id: aid});
+        ans.innerHTML = myAns.value;
+
+        ansbox.removeChild(submitBtn);
+        ansbox.removeChild(myAns);
+        ansbox.appendChild(ans);
+        ansbox.appendChild(iconbtn);
+      });
+    });
+  }
+  
   title.innerHTML = data.get("question");
-  var stat = data.get("solved");
-  if (stat == null || !stat)
-    title.setAttribute("style", "color:red;");
-  else
-    title.setAttribute("style", "color:green;");
+  title.setAttribute("style", "color:red;");
 }
 
 function displayAnswer(data, section, id, aid, ref) {
   var ansbox = document.createElement("DIV");
   ansbox.setAttribute("id", "answer");
   var ans = document.createElement("P");
-
-  var iconbtn = document.createElement("BUTTON");
-  var icon = document.createElement("I");
-  icon.setAttribute("class", "material-icons");
-  icon.setAttribute("id", "icon");
-  icon.appendChild(document.createTextNode("border_color"));
-
-  iconbtn.setAttribute("style", "width: 30px;\nheight: 30px;");
-  iconbtn.setAttribute("align", "center");
-  iconbtn.appendChild(icon);
-
+  
+  // edit permission
+  var user = "user2";
   ans.appendChild(document.createTextNode(data.get("value")));
   ansbox.appendChild(ans);
-  ansbox.appendChild(iconbtn);
   section.appendChild(ansbox);
+  
+  if (user != null && data.get("owner") == user) {
+    var iconbtn = document.createElement("BUTTON");
+    var icon = document.createElement("I");
+    icon.setAttribute("class", "material-icons");
+    icon.setAttribute("id", "icon");
+    icon.appendChild(document.createTextNode("border_color"));
 
-  iconbtn.addEventListener("click", () => {
-    ansbox.removeChild(iconbtn);
-    ansbox.removeChild(ans);
+    iconbtn.setAttribute("style", "width: 30px;\nheight: 30px;");
+    iconbtn.setAttribute("align", "center");
+    iconbtn.appendChild(icon);
+    
+    ansbox.appendChild(iconbtn);
+    
+    iconbtn.addEventListener("click", () => {
+      ansbox.removeChild(iconbtn);
+      ansbox.removeChild(ans);
 
-    var myAns = document.createElement("INPUT");
-    myAns.setAttribute("type", "text");
-    myAns.setAttribute("value", ans.innerHTML);
-    myAns.setAttribute("id", "myans");
+      var myAns = document.createElement("INPUT");
+      myAns.setAttribute("type", "text");
+      myAns.setAttribute("value", ans.innerHTML);
+      myAns.setAttribute("id", "myans");
 
-    var divSubmit = document.createElement("DIV");
-    var submitBtn = document.createElement("BUTTON");
-    submitBtn.setAttribute("type", "submit");
-    submitBtn.appendChild(document.createTextNode("Submit"));
-    submitBtn.setAttribute("style", "height: 28px;\n margin-left: 10px;");
+      var divSubmit = document.createElement("DIV");
+      var submitBtn = document.createElement("BUTTON");
+      submitBtn.setAttribute("type", "submit");
+      submitBtn.appendChild(document.createTextNode("Submit"));
+      submitBtn.setAttribute("style", "height: 28px;\n margin-left: 10px;");
 
-    ansbox.appendChild(myAns);
-    ansbox.appendChild(submitBtn);
+      ansbox.appendChild(myAns);
+      ansbox.appendChild(submitBtn);
 
-    submitBtn.addEventListener("click", () => {
-      var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
-      newAns.set({value: myAns.value, id: aid});
-      ans.innerHTML = myAns.value;
+      submitBtn.addEventListener("click", () => {
+        var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
+        newAns.set({value: myAns.value, id: aid});
+        ans.innerHTML = myAns.value;
 
-      ansbox.removeChild(submitBtn);
-      ansbox.removeChild(myAns);
-      ansbox.appendChild(ans);
-      ansbox.appendChild(iconbtn);
+        ansbox.removeChild(submitBtn);
+        ansbox.removeChild(myAns);
+        ansbox.appendChild(ans);
+        ansbox.appendChild(iconbtn);
+      });
     });
-  });
+  }
 }
 
 function postAnswer(id, ref) {
@@ -125,7 +175,7 @@ function postAnswer(id, ref) {
   statusBtn.appendChild(document.createTextNode("Resolved"));
 
   statusBtn.addEventListener("click", () => {
-    ref.doc("Question " + id).update({solved: true}).then(() => {
+    ref.doc("Question " + id).set({solved: true}).then(() => {
       var title = document.getElementById("title");
       title.setAttribute("style", "color:#4CAF50;");
     });

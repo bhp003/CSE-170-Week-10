@@ -31,7 +31,7 @@ function autocomplete(inp, arr) {
           closeAllLists();
           var path = (inp.value + ".html").replace(/\s/g, "");
           ref.doc(inp.value).set({id: inp.value}).then(() => {
-            window.location.href = "Project/../html/" + inp.value + "/" + path;
+            window.location.href = inp.value + "/" + path;
           });
         });
         a.appendChild(b);
@@ -92,6 +92,7 @@ function getAllClass() {
   });
   autocomplete(document.getElementById("input"), courses);
 }
+
 function getHistory() {
   var section = document.getElementById("hist");
   ref.get().then((list) => {          
