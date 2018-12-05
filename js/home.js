@@ -1,4 +1,15 @@
-var ref = firebase.firestore().collection("History");
+var ref = firebase.firestore().collection("Users");
+
+function addHistory(name, path) {
+  var user = firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      var histRef = ref.doc(user.email).collection("History");
+      histRef.doc(name).set({name: name}).then(() => {
+        window.location.href = name + "/" + path;
+      });
+    }
+  });
+}
 
 function autocomplete(inp, arr) {
   var currentFocus;
@@ -30,9 +41,7 @@ function autocomplete(inp, arr) {
           inp.value = this.getElementsByTagName("input")[0].value;
           closeAllLists();
           var path = (inp.value + ".html").replace(/\s/g, "");
-          ref.doc(inp.value).set({id: inp.value}).then(() => {
-            window.location.href = inp.value + "/" + path;
-          });
+          addHistory(inp.value, path);
         });
         a.appendChild(b);
       }
@@ -95,18 +104,26 @@ function getAllClass() {
 
 function getHistory() {
   var section = document.getElementById("hist");
-  ref.get().then((list) => {          
-    list.forEach((item) => {
-      var btn = document.createElement("BUTTON");
-      btn.appendChild(document.createTextNode(item.id));
-      section.appendChild(btn);
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var histRef = ref.doc(user.email).collection("History");
+      histRef.get().then((list) => {
+        var history = list.docs;
+        for (var i = 0; i < 4; i++) {
+          if (history[i] != null) {
+            var btn = document.createElement("BUTTON");
+            btn.appendChild(document.createTextNode(item.id));
+            section.appendChild(btn);
       
-      btn.addEventListener("click", () => {
-        var path = (item.id + ".html").replace(/\s/g, "");
-        window.location.href = "Project/../html/" + item.id + "/" + path;
+            btn.addEventListener("click", () => {
+              var path = (item.id + ".html").replace(/\s/g, "");
+              window.location.href = item.id + "/" + path;
+            });
+          }
+        }        
       });
-    });
-  });
+    }
+  }); 
 }
 
 getAllClass();
