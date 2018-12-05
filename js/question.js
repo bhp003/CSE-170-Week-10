@@ -42,8 +42,14 @@ function displayQuestion(data) {
   var user = firebase.auth().currentUser.email;
 
   title.innerHTML = data.get("question");
-  title.setAttribute("style", "color:red;");
-  
+  var desc = document.getElementById("desc");
+  desc.innerHTML = data.get("desc");
+  var stat = data.get("solved");
+  if (stat == null || !stat)
+    title.setAttribute("style", "color:red;");
+  else
+    title.setAttribute("style", "color:green;");
+
   // edit permission
   if (user != null && user == data.get("owner")) {
     console.log(user);
@@ -56,7 +62,7 @@ function displayQuestion(data) {
     iconbtn.setAttribute("style", "width: 30px;\nheight: 30px;");
     iconbtn.setAttribute("align", "center");
     iconbtn.appendChild(icon);
-    
+
     qbox.appendChild(iconbtn);
     iconbtn.addEventListener("click", () => {
       qbox.removeChild(iconbtn);
@@ -93,13 +99,13 @@ function displayAnswer(data, section, id, aid, ref) {
   var ansbox = document.createElement("DIV");
   ansbox.setAttribute("id", "answer");
   var ans = document.createElement("P");
-  
+
   // edit permission
   var user = firebase.auth().currentUser.email;
   ans.appendChild(document.createTextNode(data.get("value")));
   ansbox.appendChild(ans);
   section.appendChild(ansbox);
-  
+
   if (user != null && data.get("owner") == user) {
     var iconbtn = document.createElement("BUTTON");
     var icon = document.createElement("I");
@@ -110,9 +116,9 @@ function displayAnswer(data, section, id, aid, ref) {
     iconbtn.setAttribute("style", "width: 30px;\nheight: 30px;");
     iconbtn.setAttribute("align", "center");
     iconbtn.appendChild(icon);
-    
+
     ansbox.appendChild(iconbtn);
-    
+
     iconbtn.addEventListener("click", () => {
       ansbox.removeChild(iconbtn);
       ansbox.removeChild(ans);
