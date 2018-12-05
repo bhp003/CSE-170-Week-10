@@ -6,7 +6,7 @@ function makePage(id, name) {
   var breadcrumbs = document.getElementById("breadcrumbs");
   var namesplit = name.split(" ");
   var namehtml = namesplit[0] + namesplit[1] + ".html";
-  breadcrumbs.innerHTML = '<p><a href="../../../index.html">Home</a> &#8226; ' +
+  breadcrumbs.innerHTML = '<p><a href="../../home.html">Home</a> &#8226; ' +
                           '<a href="../' + namehtml + '">' + name + '</a> &#8226; ' +
                           '<a href="" id="current">Question ' + id + '</a></p>';
   getQuestion(id, ref);
