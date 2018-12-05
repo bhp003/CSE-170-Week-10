@@ -1,5 +1,5 @@
-var Q_LEN = 70;
-var DESC_LEN = 180;
+var Q_LEN = 100;
+var DESC_LEN = 300;
 function getQuestion(name) {
   var ref = firebase.firestore().collection("Courses/" + name + "/Questions").orderBy("date", "desc");
   var section = document.getElementById("qa_section");
@@ -25,11 +25,12 @@ function getQuestion(name) {
       // check if resolved for question colot
       var stat = question.get("solved");
       if (stat == null || !stat)
-        var color = "red";
+        var color = "#F7997F"; //red
       else
-        var color = "green";
+        var color = "#68A48B"; //green
       post.innerHTML = '<h3 style="color:' + color + ';">' + q +'</h3>' +
                        '<p><font size="-1">' + desc + '</font></p>';
+
       section.appendChild(post);
 
       post.addEventListener("click", (e) => {

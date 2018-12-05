@@ -178,7 +178,7 @@ function postAnswer(id, ref) {
   statusBtn.appendChild(document.createTextNode("Resolved"));
 
   statusBtn.addEventListener("click", () => {
-    ref.doc("Question " + id).set({solved: true}).then(() => {
+    ref.doc("Question " + id).update({solved: true}).then(() => {
       var title = document.getElementById("title");
       title.setAttribute("style", "color:#4CAF50;");
     });
