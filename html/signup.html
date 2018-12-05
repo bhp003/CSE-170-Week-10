@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyArVp7U0j6kVH-NfQ3pQHprGPPzxF7YWnU",
+          authDomain: "cse-170-e213b.firebaseapp.com",
+          projectId: "cse-170-e213b"
+        };
+        firebase.initializeApp(config);
+        firebase.firestore().settings({
+          timestampsInSnapshots: true
+        });
+      </script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
+    <title>Sign in</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <p class="sign" align="center">Create an Account</p>
+      <form class="form1">
+        <input id="username" type="text" align="center" placeholder="Email" required>
+        <input id="password" type="password" align="center" placeholder="Password" required>
+      </form>
+      <button id="sign_up" align="center">Sign Up</button>
+      <script src="../js/user_auth.js"></script>
+      <script>signUp();</script>         
+    </div>
+  </body>
+</html>

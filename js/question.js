@@ -1,6 +1,5 @@
 var size = 0;
 var aid = 0;
-var user = firebase.auth().currentUser;
 
 function makePage(id, name) {
   var ref = firebase.firestore().collection("Courses/" + name + "/Questions");
@@ -12,14 +11,12 @@ function makePage(id, name) {
                           '<a href="" id="current">Question ' + id + '</a></p>';
   getQuestion(id, ref);
   getAnswer(id, ref);
-  console.log("Courses/" + name + "/Questions");
 }
 
 function getQuestion(id, ref) {
   ref.doc("Question " + id).get().then((result) => {
     displayQuestion(result);
   });
-  console.log(user);
 }
 
 function getAnswer(id, ref) {
@@ -42,10 +39,20 @@ function getAnswer(id, ref) {
 function displayQuestion(data) {
   var title = document.getElementById("title");
   var qbox = document.getElementById("qbox");
+  var user = firebase.auth().currentUser.email;
+
+  title.innerHTML = data.get("question");
+  var desc = document.getElementById("desc");
+  desc.innerHTML = data.get("desc");
+  var stat = data.get("solved");
+  if (stat == null || !stat)
+    title.setAttribute("style", "color:red;");
+  else
+    title.setAttribute("style", "color:green;");
 
   // edit permission
-  var user = "user1";
   if (user != null && user == data.get("owner")) {
+    console.log(user);
     var iconbtn = document.createElement("BUTTON");
     var icon = document.createElement("I");
     icon.setAttribute("class", "material-icons");
@@ -58,13 +65,13 @@ function displayQuestion(data) {
 
     qbox.appendChild(iconbtn);
     iconbtn.addEventListener("click", () => {
-      ansbox.removeChild(iconbtn);
-      ansbox.removeChild(ans);
+      qbox.removeChild(iconbtn);
+      qbox.removeChild(title);
 
-      var myAns = document.createElement("INPUT");
-      myAns.setAttribute("type", "text");
-      myAns.setAttribute("value", ans.innerHTML);
-      myAns.setAttribute("id", "myans");
+      var newQuestion = document.createElement("INPUT");
+      newQuestion.setAttribute("type", "text");
+      newQuestion.setAttribute("value", title.innerHTML);
+      newQuestion.setAttribute("id", "newQuestion");
 
       var divSubmit = document.createElement("DIV");
       var submitBtn = document.createElement("BUTTON");
@@ -72,30 +79,20 @@ function displayQuestion(data) {
       submitBtn.appendChild(document.createTextNode("Submit"));
       submitBtn.setAttribute("style", "height: 28px;\n margin-left: 10px;");
 
-      ansbox.appendChild(myAns);
-      ansbox.appendChild(submitBtn);
+      qbox.appendChild(newQuestion);
+      qbox.appendChild(submitBtn);
 
       submitBtn.addEventListener("click", () => {
-        var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
-        newAns.set({value: myAns.value, id: aid});
-        ans.innerHTML = myAns.value;
+        ref.doc("Question " + id).set({question: newQuestion.value});
+        title.innerHTML = newQuestion.value;
 
-        ansbox.removeChild(submitBtn);
-        ansbox.removeChild(myAns);
-        ansbox.appendChild(ans);
-        ansbox.appendChild(iconbtn);
+        qbox.removeChild(submitBtn);
+        qbox.removeChild(newQuestion);
+        qbox.appendChild(title);
+        qbox.appendChild(iconbtn);
       });
     });
   }
-
-  title.innerHTML = data.get("question");
-  var desc = document.getElementById("desc");
-  desc.innerHTML = data.get("desc");
-  var stat = data.get("solved");
-  if (stat == null || !stat)
-    title.setAttribute("style", "color:red;");
-  else
-    title.setAttribute("style", "color:green;");
 }
 
 function displayAnswer(data, section, id, aid, ref) {
@@ -104,7 +101,7 @@ function displayAnswer(data, section, id, aid, ref) {
   var ans = document.createElement("P");
 
   // edit permission
-  var user = "user2";
+  var user = firebase.auth().currentUser.email;
   ans.appendChild(document.createTextNode(data.get("value")));
   ansbox.appendChild(ans);
   section.appendChild(ansbox);
@@ -169,9 +166,9 @@ function postAnswer(id, ref) {
   submitBtn.appendChild(document.createTextNode("Submit"));
 
   submitBtn.addEventListener("click", () => {
-    console.log("yo");
+    var user = firebase.auth().currentUser.email;
     var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + size);
-    newAns.set({value: myAns.value, id: size}).then(() => {
+    newAns.set({value: myAns.value, id: size, owner: user}).then(() => {
       window.location.reload(true);
     });
   });
