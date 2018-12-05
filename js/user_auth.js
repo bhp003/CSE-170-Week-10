@@ -6,9 +6,9 @@ function signUp() {
 
     firebase.auth().createUserWithEmailAndPassword(email.value, pass.value).then(() => {
       firebase.auth().signInWithEmailAndPassword(email.value, pass.value).then(() => {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user)
-            window.location.href = "home.html";
+        var ref = firebase.firestore().collection("Users").doc(email.value);
+        ref.set({email: email.value.split("@")[0]}).then(() => {
+          window.location.href = "home.html";
         });
       });
     });
@@ -21,10 +21,8 @@ function signIn() {
   var pass = document.getElementById("password");
   signinbtn.addEventListener("click", () => {
     firebase.auth().signInWithEmailAndPassword(email.value, pass.value).then(() => {
-      firebase.auth().onAuthStateChanged((user) => {
-      if (user)
-        window.location.href = "Project/../html/home.html";
-      });
+      console.log(firebase.auth().currentUser == null);
+      window.location.href = "Project/../html/home.html";
     });
   });
 }
