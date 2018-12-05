@@ -29,7 +29,7 @@ function getAnswer(id, ref) {
   ref.doc("Question " + id).collection("Answers").get().then((list) => {
     list.forEach((ans) => {
       aid++;
-      displayAnswer(ans, ansSection, id, aid);
+      displayAnswer(ans, ansSection, id, aid, ref);
     });
     size = list.size + 1;
     postAnswer(id, ref);
@@ -138,14 +138,17 @@ function displayAnswer(data, section, id, aid, ref) {
       ansbox.appendChild(submitBtn);
 
       submitBtn.addEventListener("click", () => {
+        console.log(ref);
         var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
         newAns.set({value: myAns.value, id: aid});
         ans.innerHTML = myAns.value;
+        console.log(myAns.value);
 
         ansbox.removeChild(submitBtn);
         ansbox.removeChild(myAns);
         ansbox.appendChild(ans);
         ansbox.appendChild(iconbtn);
+
       });
     });
   }

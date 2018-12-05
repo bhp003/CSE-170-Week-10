@@ -43,6 +43,7 @@ h1 {
 #qa_section, #fileupload_section {
   padding: 20px;
   padding-top: 50px;
+  padding-bottom: 50px;
   margin: auto;
   width: 600px;
   background: #D9E6EF; /* light blue */
