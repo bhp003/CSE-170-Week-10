@@ -141,7 +141,7 @@ function displayAnswer(data, section, id, aid, ref) {
 
         submitBtn.addEventListener("click", () => {
           var newAns = ref.doc("Question " + id).collection("Answers").doc("Answer " + aid);
-          newAns.set({value: myAns.value, id: aid});
+          newAns.set({value: myAns.value, id: aid, owner: user});
           ans.innerHTML = myAns.value;
 
           ansbox.removeChild(submitBtn);
