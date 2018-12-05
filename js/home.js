@@ -14,7 +14,7 @@ function addHistory(name, path) {
 function autocomplete(inp, arr) {
   var currentFocus;
   var currItem;
-  
+
   inp.addEventListener("input", function(e) {
     var a, b, val = this.value;
     closeAllLists();
@@ -23,7 +23,7 @@ function autocomplete(inp, arr) {
     a = document.createElement("DIV");
     a.setAttribute("id", this.id + "autocomplete-list");
     a.setAttribute("class", "autocomplete-items");
-    
+
     this.parentNode.appendChild(a);
     for (var i = 0; i < arr.length; i++) {
       /*check if the item starts with the same letters as the text field value:*/
@@ -54,18 +54,18 @@ function autocomplete(inp, arr) {
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(x);
-    } 
+    }
     else if (e.keyCode == 38) { //up
       currentFocus--;
       addActive(x);
-    } 
+    }
     else if (e.keyCode == 13) {
       e.preventDefault();
       if (currentFocus > -1)
         if (x) x[currentFocus].click();
     }
   });
-  
+
   function addActive(x) {
     if (!x) return false;
     removeActive(x);
@@ -73,12 +73,12 @@ function autocomplete(inp, arr) {
     if (currentFocus < 0) currentFocus = (x.length - 1);
     x[currentFocus].classList.add("autocomplete-active");
   }
-  
+
   function removeActive(x) {
     for (var i = 0; i < x.length; i++)
       x[i].classList.remove("autocomplete-active");
   }
-  
+
   function closeAllLists(elmnt) {
     var x = document.getElementsByClassName("autocomplete-items");
     for (var i = 0; i < x.length; i++) {

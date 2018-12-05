@@ -14,6 +14,16 @@ body {
   padding: 0;
 }
 
+.signup {
+  text-align:right;
+  margin-right:7px;
+  margin-top:5px;
+}
+
+.signup a {
+  color:black;
+}
+
 .autocomplete {
   position: relative;
   display: inline-block;
@@ -55,22 +65,29 @@ form.search button {
   width: 35px;
   height: 36px;
   border-left: none;
-  background-color: rgb(235, 113, 0);
+  background-color: #F7997F;
   color: white;
   border: 1px solid grey;
   position: relative;
-  top: -7px;
+  top: -5px;
 }
 
 .title h1 {
-  margin-bottom: 20px;
+  margin-top:40px;
+  margin-bottom: 80px;
   text-align: center;
-  font-size: 150px;
+  font-size: 130px;
   font-weight: 600;
 }
 
 .history  {
   text-align: center;
+  padding: 20px;
+  background: black;
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 5px;
+  opacity: 0.8;
 }
 
 .history button {
@@ -79,15 +96,16 @@ form.search button {
   width: auto;
   height: 30px;
   font-size: 16px;
-  background: rgb(235, 113, 0);
+  background: #F7997F;
   border: none;
   border-radius: 5px;
   margin: 10px;
+  color: white;
 }
 
 #historyText {
   text-align: center;
-  padding-top: 50px;
+  padding-top: -60px;
 }
 
 a.button {
@@ -98,7 +116,7 @@ a.button {
   color: initial;
 }
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: #6CB2E5; /* darker blue */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -116,14 +134,15 @@ form {
   background: black;
   opacity: .8;
   padding: 40px;
-  margin: 200px 0;
-
+  margin: 200p 0;
+  margin-bottom: 10px;
 }
 form .markettext {
   color: white;
   font-weight: 600;
   font-size: 18px;
   text-align: center;
+  margin-top:-20px;
 }
 .markettext i {
   margin-right: 20px;
@@ -145,17 +164,17 @@ form input::placeholder {
 }
 
 .top-header {
-    
+
 }
 
 .top-header img {
   width: 100%;
-  filter: blur(8px);
+  filter: blur(3px);
   position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 60%;
-  margin-top: -40px;
+  height: 105%;
+  margin-top: -80px;
   z-index: -100;
 }
