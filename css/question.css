@@ -43,21 +43,22 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
-div:not(:first-child){
+div:not(:first-child), #desc{
     width: 65%;
-    margin: 0 auto;
-    background: #D5FFFE;
+    margin: 20px auto;
+    background: #D9E6EF;
     padding: 20px;
     text-align: center;
     border-radius: 5px;
     position: relative;
 }
+
+#desc{
+    margin-top: -25px;
+}
 button[style*="float: right;"]{
     background: green;
-    position: absolute;
-    right: 0;
-    top: -680%;
-    right: -75px;
+    
     
 }
 @media (max-width: 700px){
