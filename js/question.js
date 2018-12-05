@@ -40,7 +40,11 @@ function getAnswer(id, ref) {
 function displayQuestion(data) {
   var title = document.getElementById("title");
   title.innerHTML = data.get("question");
-  title.setAttribute("style", "color:red;");
+  var stat = data.get("solved");
+  if (stat == null || !stat)
+    title.setAttribute("style", "color:red;");
+  else
+    title.setAttribute("style", "color:green;");
 }
 
 function displayAnswer(data, section, id, aid, ref) {
@@ -121,7 +125,7 @@ function postAnswer(id, ref) {
   statusBtn.appendChild(document.createTextNode("Resolved"));
 
   statusBtn.addEventListener("click", () => {
-    ref.doc("Question " + id).set({solved: true}).then(() => {
+    ref.doc("Question " + id).update({solved: true}).then(() => {
       var title = document.getElementById("title");
       title.setAttribute("style", "color:#4CAF50;");
     });

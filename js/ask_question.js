@@ -10,7 +10,7 @@ function ask() {
 
     var ref = firebase.firestore().collection("Courses/" + classname + "/Questions");
     ref.get().then((list) => {
-      ref.doc("Question " + (list.size + 1)).set({question: question, desc: desc, date: date.getTime()}).then(() => {
+      ref.doc("Question " + (list.size + 1)).set({question: question, desc: desc, date: date.getTime(), solved: false}).then(() => {
         window.location.href = classhtml;
       });
     });

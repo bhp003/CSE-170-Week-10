@@ -7,18 +7,23 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    width: 180px;
 }
 
 .qa_column button{
-	padding: 15px 32px;
+	padding: 2px 20px;
+  width: 380px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
   display:block;
+  word-wrap: break-word;
 }
+
 .titlebox{
 	background-color: blue;
 }
+
 .breadcrumbs{
   text-align: left;
 }
@@ -27,4 +32,8 @@ h1{
 }
 #current{
   color: red;
+}
+#ruler {
+  visibility: hidden;
+  white-space: nowrap;
 }
