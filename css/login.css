@@ -10,7 +10,7 @@ body {
 }
 
 .home a{
-  color:#D9E6EF;
+  color:white;
 }
 
 .main {
@@ -97,7 +97,7 @@ form.form1 {
 
 #signup {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  color: #E1BEE7;
+  color: #F7997F;
   padding-top: 15px;
   display: block;
 }
