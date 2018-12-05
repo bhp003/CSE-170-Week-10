@@ -1,22 +1,19 @@
 function ask() {
   var btn = document.getElementById("submit");
   btn.addEventListener("click", () => {
-    var list = document.getElementById("classes");
-    var course = list.options[list.selectedIndex].value;
-    var title = document.getElementById("title").value;
+    var question = document.getElementById("question").value;
     var desc = document.getElementById("desc").value;
+    var classname = document.title;
+    var classid = classname.split(" ");
+    var classhtml = classid[0] + classid[1] + ".html";
+    var date = new Date();
 
-    if (list.selectedIndex == 0)
-      alert("Please select a course");
-    else {
-      console.log(course);
-      var ref = firebase.firestore().collection("Courses/CSE 170/Questions");
-      ref.get().then((list) => {
-        ref.doc("Question " + (list.size + 1)).set({question: desc}).then(() => {
-          window.location.href = "Project/../CSE 170/cse170.html"
-        });
+    var ref = firebase.firestore().collection("Courses/" + classname + "/Questions");
+    ref.get().then((list) => {
+      ref.doc("Question " + (list.size + 1)).set({question: question, desc: desc, date: date.getTime(), solved: false}).then(() => {
+        window.location.href = classhtml;
       });
-    }
+    });
   });
 }
 
