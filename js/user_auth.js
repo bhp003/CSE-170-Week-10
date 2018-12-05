@@ -1,14 +1,19 @@
-/*function signUp() {
-  // fix later
-  var signup = document.getElementById("signup");
+function signUp() {
+  var signup = document.getElementById("sign_up");
   signup.addEventListener("click", () => {
-    var email = document.getElementById("email").value;
-    var pass = document.getElementById("password").value;
+    var email = document.getElementById("username");
+    var pass = document.getElementById("password");
 
-    firebase.auth().signInWithEmailAndPassword(email, pass);
-    console.log(firebase.auth().currentUser.email + "\n" + firebase.auth().currentUser.displayName);
+    firebase.auth().createUserWithEmailAndPassword(email.value, pass.value).then(() => {
+      firebase.auth().signInWithEmailAndPassword(email.value, pass.value).then(() => {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user)
+            window.location.href = "home.html";
+        });
+      });
+    });
   });
-}*/
+}
 
 function signIn() {
   var signinbtn = document.getElementById("signin");
@@ -19,9 +24,7 @@ function signIn() {
       firebase.auth().onAuthStateChanged((user) => {
       if (user)
         window.location.href = "Project/../html/home.html";
-    });
+      });
     });
   });
 }
-
-signIn();
