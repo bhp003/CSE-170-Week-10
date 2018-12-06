@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
     <script>
-      // Initialize Firebase
+        // Initialize Firebase
       var config = {
         apiKey: "AIzaSyArVp7U0j6kVH-NfQ3pQHprGPPzxF7YWnU",
         authDomain: "cse-170-e213b.firebaseapp.com",
@@ -16,22 +17,42 @@
     </script>
     <link rel="stylesheet" type="text/css" href="../../css/class.css">
     <title>CSE 170</title>
-  </head>
+</head>
 
-  <body class="body">
-	<div class="titlebox">
-		<h1 align="center">CSE 170</h1>
-	</div>
-  <div class="breadcrumbs">
-    <p><a href="../home.html">Home</a> &#8226; <a href="" id="current">CSE 170</a></p>
-  </div>
-    <div align="center" style="margin-bottom:40px">
-      <button class="askbtn" id="ask" onclick="window.location.href='ask_question.html'">Ask a question</button>
+<body class="body">
+    <div class="titlebox">
+        <h1 align="center">CSE 170</h1>
     </div>
-    <div id="qa_section" class="qa_column" align="center" style="vertical-align:middle;">
+    <div class="breadcrumbs">
+        <p><a href="../home.html">Home</a> &#8226; <a href="" id="current">CSE 170</a></p>
     </div>
+
+    <section class="classcontainer">
+
+        <div class="fileuploadcontainer">
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload a file</button>
+                <input id="pdffile" type="file" name="myfile" accept="application/pdf" />
+            </div>
+            <div id="fileupload_section" class="qa_column" align="center" style="vertical-align:middle;">
+            </div>
+        </div>
+        <div class="questioncontainer">
+            <div align="center" style="margin-bottom:40px">
+                <button class="askbtn" id="ask" onclick="window.location.href='../ask_question.html'">Ask a Question</button>
+            </div>
+            <div id="qa_section" class="qa_column" align="center" style="vertical-align:middle;">
+            </div>
+        </div>
+
+    </section>
+
 
     <script src="../../js/class.js"></script>
-    <script>getQuestion("CSE 170");</script>
-  </body>
+    <script>
+        getQuestion("CSE 170");
+
+    </script>
+</body>
+
 </html>
