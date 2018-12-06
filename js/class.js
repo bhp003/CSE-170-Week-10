@@ -42,27 +42,76 @@ function getQuestion(name) {
     });
 }
 
-function uploadPDF() {
-    
-    var pdfUpload = document..getElementById("#pdffile");
+// File Upload Functionality
+var pdfUpload = document.getElementById("pdffile");
+var pdfURLs = null;
 
-    pdfUpload.on('change', function (event) {
-        console.log('ref target', self.pdfInput)
-        var filePDF = self.pdfInput.files[0];
-        var filename = filePDF.name;
-        console.log('my file', filePDF)
-        console.log('my filename', filename)
-        var storageRef = firebase.storage().ref('/pdf/' + filename);
-        var uploadPdfTask = storageRef.put(filePDF);
+pdfUpload.onchange = event => {
+
+    var filePDF = event.target.files[0];
+    var filename = filePDF.name;
+    console.log('my file', filePDF)
+    console.log('my filename', filename)
+
+    if (document.body.classList.contains("cogs120")) {
+
+        let storageRef = firebase.storage().ref('/cogs120/' + filename);
+        let uploadPdfTask = storageRef.put(filePDF);
         uploadPdfTask.on('state_changed', function (snapshot) {}, function (error) {
             console.log(error)
         }, function () {
             uploadPdfTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                 pdfURLs = downloadURL;
+                
+                 var messagesRef = firebase.database().ref('/Courses/COGS 120/fileupload')
+                var newMessageRef = messagesRef.push();
+                newMessageRef.set({
+                    downloadURL: downloadURL
+                })
             })
         })
 
         console.log('pdfURL', pdfURLs)
+    } else if (document.body.classList.contains("cse100")) {
 
-    })
+        let storageRef = firebase.storage().ref('/cse100/' + filename);
+        let uploadPdfTask = storageRef.put(filePDF);
+        uploadPdfTask.on('state_changed', function (snapshot) {}, function (error) {
+            console.log(error)
+        }, function () {
+            uploadPdfTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                pdfURLs = downloadURL;
+                 var messagesRef = firebase.database().ref('/Courses/CSE 100/fileupload')
+                var newMessageRef = messagesRef.push();
+                newMessageRef.set({
+                    downloadURL: downloadURL
+                })
+            })
+        })
+
+        console.log('pdfURL', pdfURLs)
+    } else if (document.body.classList.contains("cse170")) {
+        console.log("WE ARE IN CSE 170")
+        let storageRef = firebase.storage().ref('/cse170/' + filename);
+        let uploadPdfTask = storageRef.put(filePDF);
+        uploadPdfTask.on('state_changed', function (snapshot) {}, function (error) {
+            console.log(error)
+        }, function () {
+            uploadPdfTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                pdfURLs = downloadURL;
+                var messagesRef = firebase.database().ref('/Courses/CSE 170/fileupload')
+                var newMessageRef = messagesRef.push();
+                console.log('ya yeet', downloadURL)
+                newMessageRef.set({
+                    downloadURL: downloadURL
+                })
+                //                var div = document.getElementById('fileupload_section');
+                //                div.innerHTML += `<a href=${downloadURL}>${filename}</a>`;
+            })
+        })
+
+        console.log('pdfURL', pdfURLs)
+    }
+
+
 }
