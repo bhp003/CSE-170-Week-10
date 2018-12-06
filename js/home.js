@@ -120,7 +120,6 @@ function getHistory() {
               var path = (e.target.value + ".html").replace(/\s/g, "");
               window.location.href = e.target.value + "/" + path;
             });
-            
             section.appendChild(btn);
           }
         }        
