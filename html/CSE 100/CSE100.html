@@ -3,11 +3,13 @@
   <head>
     <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
     <script>
-      // Initialize Firebase
+        // Initialize Firebase
       var config = {
         apiKey: "AIzaSyArVp7U0j6kVH-NfQ3pQHprGPPzxF7YWnU",
         authDomain: "cse-170-e213b.firebaseapp.com",
-        projectId: "cse-170-e213b"
+        projectId: "cse-170-e213b",
+        storageBucket: "cse-170-e213b.appspot.com",
+          databaseURL: "https://cse-170-e213b.firebaseio.com"
       };
       firebase.initializeApp(config);
       firebase.firestore().settings({
@@ -16,22 +18,39 @@
     </script>
     <link rel="stylesheet" type="text/css" href="../../css/class.css">
     <title>CSE 100</title>
-  </head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
 
-  <body class="body">
-	<div class="titlebox">
-		<h1 align="center">CSE 100</h1>
-	</div>
-  <div class="breadcrumbs">
-    <p><a href="../home.html">Home</a> • <a href="" id="current">CSE 100</a></p>
-  </div>
-    <div align="center" style="margin-bottom:40px">
-      <button class="askbtn" id="ask" onclick="window.location.href='ask_question.html'">Ask a question</button>
+<body class="body cse100">
+    <div class="titlebox">
+        <h1 align="center">CSE 100</h1>
     </div>
-    <div id="qa_section" class="qa_column" align="center" style="vertical-align:middle;">
+    <div class="breadcrumbs">
+        <p><a href="../home.html">Home</a> • <a href="" id="current">CSE 100</a></p>
     </div>
+    <section class="classcontainer">
+
+        <div class="fileuploadcontainer">
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload a file</button>
+                <input id="pdffile" type="file" name="myfile" accept="application/pdf" />
+            </div>
+            <div id="fileupload_section" class="qa_column" align="center" style="vertical-align:middle;">
+            </div>
+        </div>
+        <div class="questioncontainer">
+            <div align="center" style="margin-bottom:40px">
+                <button class="askbtn" id="ask" onclick="window.location.href='../ask_question.html'">Ask a Question</button>
+            </div>
+            <div id="qa_section" class="qa_column" align="center" style="vertical-align:middle;">
+            </div>
+        </div>
+
+    </section>
 
     <script src="../../js/class.js"></script>
-    <script>getQuestion("CSE 100");</script>
-  </body>
+    <script>
+        getQuestion("CSE 100");
+    </script>
+</body>
 </html>

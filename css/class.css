@@ -48,6 +48,9 @@ h1 {
   width: 600px;
   background: #D9E6EF; /* light blue */
 }
+#fileupload_section{
+    margin-top: 43px;
+}
 
 .qa_column_h3 {
   text-align: center;
