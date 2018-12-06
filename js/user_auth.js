@@ -3,14 +3,21 @@ function signUp() {
   signup.addEventListener("click", () => {
     var email = document.getElementById("username");
     var pass = document.getElementById("password");
-
+    
     firebase.auth().createUserWithEmailAndPassword(email.value, pass.value).then(() => {
-      firebase.auth().signInWithEmailAndPassword(email.value, pass.value).then(() => {
-        var ref = firebase.firestore().collection("Users").doc(email.value);
-        ref.set({email: email.value.split("@")[0]}).then(() => {
-          window.location.href = "home.html";
-        });
+      var ref = firebase.firestore().collection("Users").doc(email.value);
+      ref.set({email: email.value.split("@")[0]}).then(() => {
+        window.location.href = "home.html";
       });
+    }).catch((err) => {
+      var section = document.getElementById("su_section");
+      if (err.code != null) {
+        var errMessage = document.createElement("P");
+        errMessage.setAttribute("align", "center");
+        errMessage.appendChild(document.createTextNode("Invalid Email/Password"));
+        errMessage.setAttribute("style", "color: red;\nfont-family: 'Ubuntu', sans-serif");
+        section.appendChild(errMessage);
+      }
     });
   });
 }
@@ -21,8 +28,17 @@ function signIn() {
   var pass = document.getElementById("password");
   signinbtn.addEventListener("click", () => {
     firebase.auth().signInWithEmailAndPassword(email.value, pass.value).then(() => {
-      console.log(firebase.auth().currentUser == null);
-      window.location.href = "Project/../html/home.html";
+      window.location.href = "html/home.html";
+    }).catch((err) => {
+      var section = document.getElementById("si_section");
+      console.log(err == null);
+      if (err.code != null) {
+        var errMessage = document.createElement("P");
+        errMessage.setAttribute("align", "center");
+        errMessage.appendChild(document.createTextNode("Invalid Email/Password"));
+        errMessage.setAttribute("style", "color: red;\nfont-family: 'Ubuntu', sans-serif");
+        section.appendChild(errMessage);
+      }
     });
   });
 }
