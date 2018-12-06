@@ -11,7 +11,6 @@ for file in files:
             print(i)
             data = fdata
             split1 = data.split(title)
-            print(split1[0])
             data = split1[0] + '<title>Question ' + str(i) + '</title>' + split1[1]
             split2 = data.split(id)
             data = split2[0] + 'makePage(' + str(i) + split2[1]

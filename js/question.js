@@ -22,9 +22,8 @@ function getQuestion(id, ref) {
 function getAnswer(id, ref) {
   var ansSection = document.getElementById("answers");
   var header = document.createElement("H2");
-  header.setAttribute("align", "center");
-  header.setAttribute("style", "font-size: 16pt;");
-  ansSection.appendChild(header.appendChild(document.createTextNode("Answers:")));
+  header.innerHTML = "<h4>Answers</h4>"
+  ansSection.appendChild(header);
 
   ref.doc("Question " + id).collection("Answers").get().then((list) => {
     list.forEach((ans) => {
@@ -47,9 +46,9 @@ function displayQuestion(data) {
     desc.innerHTML = data.get("desc");
     var stat = data.get("solved");
     if (stat == null || !stat)
-      title.setAttribute("style", "color:red;");
+      title.setAttribute("style", "color:#F7997F;");
     else
-      title.setAttribute("style", "color:green;");
+      title.setAttribute("style", "color:#68A48B;");
 
     // edit permission
     if (user == data.get("owner")) {
@@ -183,7 +182,7 @@ function postAnswer(id, ref) {
   statusBtn.addEventListener("click", () => {
     ref.doc("Question " + id).update({solved: true}).then(() => {
       var title = document.getElementById("title");
-      title.setAttribute("style", "color:#4CAF50;");
+      title.setAttribute("style", "color:#68A48B;");
     });
   });
 
