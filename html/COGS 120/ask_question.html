@@ -22,31 +22,28 @@
     </head>
 
     <body>
-      <div class='newpost'>
-        <div class="breadcrumbs">
-          <p><a href="../home.html">Home</a> &#8226; <a href="COGS120.html">COGS 120</a> &#8226; <a href=""><span class="red">Ask a Question</span></a></p>
-        </div><br />
-        <h1 style="text-align: center;font-weight: bold;font-size:30px;margin-bottom: 0rem;margin-top:30px;">Ask a Question</h1>
-        <section class='newpost2' align="center">
-          <div style="left:10%" class='formbox'>
-            <p class='required'>Required fields are marked with <span class='red'>*</span></p>
-            <div>
-              <section>
-                <label class='required'>Question <span class='red'>*</span></label>
-                <input id='question' type='text' name='question' placeholder="Enter a question" required></input>
-              </section>
-
-              <section>
-                <label class='required' >Description <span class='red'>*</span></label>
-                <textarea align="left" id='desc' rows="6" placeholder='Enter a description of the question' cols="36" required minLength="30"></textarea>
-              </section>
-            </div>
+      <div class="breadcrumbs">
+        <p><a href="../home.html">Home</a> &#8226; <a href="COGS120.html">COGS 120</a> &#8226; <a href="" id="current">Ask a Question</span></a></p>
+      </div><br />
+      <div class="box" align="center">
+        <h1>Ask a Question</h1>
+        <div class='formbox'>
+          <p class='required'>Required fields are marked with a <span style='color:red;'>*</span></p>
+          <div>
+            <section>
+              <h2>Question <span style='color:red;'>*</span></h2><br />
+              <input id='question' type='text' name='question' placeholder="Enter a question" required></input>
+            </section>
+            <section>
+              <h2>Description <span style='color:red;'>*</span></h2><br />
+              <textarea align="left" id='desc' rows="6" placeholder='Enter a description of the question' cols="36" required minLength="30"></textarea>
+            </section>
           </div>
-        </section>
-
-        <div class='button'>
-					<input id="submit" class='continuebutton' style="width:400px;margin: auto;" type="button" value="Post this Question"/>
         </div>
+      </section>
+
+      <div class='button'>
+				<input id="submit" class='continuebutton' style="width:400px;margin: auto;" type="button" value="Post this Question"/>
       </div>
       <script src="../../js/ask_question.js"></script>
     </body>
